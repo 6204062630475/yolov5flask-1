@@ -1,7 +1,8 @@
 import cv2
-      
-                
+import torch
+import numpy as np        
         
+model = torch.hub.load('ultralytics/yolov5', 'custom',path='best.pt',force_reload=True)
 
 class VideoCamera(object):
     def __init__(self):
@@ -19,6 +20,8 @@ class VideoCamera(object):
     
     def get_frame(self):
         success, image = self.video.read()
+        results=model(image)
+        a=np.squeeze(results.render())
 
         
        
